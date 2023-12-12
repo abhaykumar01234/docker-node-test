@@ -1,0 +1,20 @@
+# Use root/example as user/password credentials
+version: "2"
+
+services:
+  node:
+    build:
+      context: .
+      dockerfile: node.dockerfile
+    container_name: node_server
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./node_project:/home/node
+      - /home/node/node_modules
+    networks:
+      - sql-network
+
+networks:
+  sql-network:
+    driver: bridge
